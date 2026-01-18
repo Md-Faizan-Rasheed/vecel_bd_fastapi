@@ -1,0 +1,39 @@
+# --- Core Framework ---
+fastapi==0.109.2
+uvicorn[standard]==0.27.0
+
+# --- Database (MongoDB-style ObjectId) ---
+pymongo==4.6.3
+
+
+# --- File Uploads ---
+python-multipart==0.0.6
+
+# --- HTTP Client ---
+httpx==0.26.0
+requests==2.31.0
+
+# --- Environment Variables ---
+python-dotenv==1.0.1
+
+# --- PDF Processing ---
+PyPDF2==3.0.1
+
+# --- Google Drive API (and authentication) ---
+google-api-python-client==2.126.0
+google-auth==2.29.0
+google-auth-httplib2==0.2.0
+google-auth-oauthlib==1.2.1
+
+# --- CORS / ASGI Middleware ---
+starlette==0.36.3  # aligns cleanly with FastAPI 0.109.x
+
+# --- Pydantic for data validation ---
+pydantic==2.6.4
+pydantic-core==2.16.3
+
+# --- Typing / Utilities ---
+typing-extensions==4.12.2
+shutilwhich==1.1.0
+motor==3.4.0
+
