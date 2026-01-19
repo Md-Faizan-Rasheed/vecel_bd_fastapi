@@ -184,6 +184,8 @@ import os
 import httpx
 from dotenv import load_dotenv
 from database import db
+from fastapi.responses import Response
+
 
 # ======================================
 # Load environment variables
@@ -204,22 +206,39 @@ app = FastAPI(
 # ======================================
 # CORS Middleware (FIXED)
 # ======================================
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=[
+#         "http://localhost:3000",
+#         "http://127.0.0.1:3000",
+#         "http://localhost:5173",
+#         "http://127.0.0.1:5173",
+#         "https://your-frontend.vercel.app",  # replace with real prod frontend
+#         "https://vecelbdfastapi-git-main-faizs-projects-96be4be2.vercel.app"
+#     ],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+#     expose_headers=["*"]
+# )
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://your-frontend.vercel.app",  # replace with real prod frontend
-        "https://vecelbdfastapi-git-main-faizs-projects-96be4be2.vercel.app"
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],  # TEMP for debugging
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"]
 )
 
+
+@app.options("/{rest_of_path:path}")
+async def preflight_handler(rest_of_path: str, request: Request):
+    response = Response()
+    response.headers["Access-Control-Allow-Origin"] = request.headers.get("origin", "*")
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    return response
 # ======================================
 # Environment Config
 # ======================================
