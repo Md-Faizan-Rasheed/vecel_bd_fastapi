@@ -185,6 +185,7 @@ import httpx
 from dotenv import load_dotenv
 from database import db
 from fastapi.responses import Response
+from fastapi import Request
 
 
 # ======================================
